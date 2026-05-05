@@ -793,6 +793,7 @@
         let cart = [];
 
         function addToCart(id, name, price, icon) {
+            // Cek apakah item sudah ada di keranjang
             const existingItem = cart.find(item => item.id === id);
             if (existingItem) {
                 existingItem.qty += 1;
@@ -804,20 +805,25 @@
             showToast(name);
         }
 
+        // Fungsi untuk tombol + dan - di dalam keranjang
         function updateQuantity(id, delta) {
             const item = cart.find(item => item.id === id);
             if (item) {
                 item.qty += delta;
-                if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+                // Hapus produk dari array jika kuantitas jadi 0
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.id !== id);
+                }
             }
             updateCartUI();
         }
 
+        // Fungsi untuk merender tampilan keranjang
         function updateCartUI() {
             const container = document.getElementById('cartItemsContainer');
             const totalDisplay = document.getElementById('cartTotalDisplay');
             
-            // Hitung total kuantitas barang
+            // Hitung total kuantitas semua barang
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
             
             // Update lencana merah di ikon keranjang
@@ -832,7 +838,7 @@
                 document.getElementById('cartBadgeMobile').classList.add('scale-0');
             }
 
-            // Update isi keranjang HTML
+            // Update isi elemen HTML di dalam Modal Keranjang
             if (cart.length === 0) {
                 container.innerHTML = `<div class="flex items-center justify-center h-full text-gray-400 text-sm">Keranjang masih kosong</div>`;
                 totalDisplay.innerText = 'Rp 0';
