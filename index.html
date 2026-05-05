@@ -50,7 +50,7 @@
             display: inline-flex;
             align-items: center;
             white-space: nowrap;
-            min-height: 1.2em; /* Mencegah struktur halaman melompat naik-turun */
+            min-height: 1.2em;
         }
         .custom-caret {
             display: inline-block;
@@ -131,7 +131,7 @@
             min-width: 100%;
             animation: ticker-scroll 35s linear infinite;
             gap: 2rem;
-            padding-right: 2rem; /* Penyeimbang gap agar loop 100% seamless */
+            padding-right: 2rem;
             will-change: transform;
             transform: translateZ(0);
         }
@@ -141,9 +141,28 @@
             100% { transform: translateX(-100%); }
         }
         .news-card { width: 350px; flex-shrink: 0; white-space: normal; }
+
+        /* --- EFEK BUTTON KERANJANG --- */
+        .btn-cart {
+            background-size: 200% auto;
+            transition: 0.5s;
+        }
+        .btn-cart:hover {
+            background-position: right center;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body class="bg-igWhiteGlow font-sans text-gray-800 antialiased overflow-x-hidden" onload="initTypewriter()">
+
+    <!-- NOTIFIKASI POP-UP MODERN (TOAST) -->
+    <div id="toastNotification" class="fixed top-24 left-1/2 transform -translate-x-1/2 z-[110] bg-white/95 backdrop-blur-xl border border-igPink/40 shadow-2xl rounded-2xl px-6 py-4 flex items-center gap-4 transition-all duration-500 opacity-0 -translate-y-10 pointer-events-none">
+        <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center text-white text-xl shadow-inner">✓</div>
+        <div>
+            <h4 class="text-igBlueDark font-bold text-sm">Berhasil Ditambahkan!</h4>
+            <p id="toastMessage" class="text-gray-500 text-xs">Item masuk ke keranjang.</p>
+        </div>
+    </div>
 
     <!-- Navbar Mengambang -->
     <nav class="fixed top-4 md:top-6 left-1/2 transform -translate-x-1/2 w-[95%] max-w-6xl z-50 transition-all duration-300 bg-white/30 backdrop-blur-xl border border-white/50 shadow-xl rounded-full">
@@ -202,7 +221,7 @@
                         ✨ Kabinet Aksentra
                     </a>
                     
-                    <!-- Animasi Ketik pada Slogan (Ditata lurus per baris & rata kiri) -->
+                    <!-- Animasi Ketik pada Slogan -->
                     <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold text-igBlueDark leading-tight mb-6 font-serif flex flex-col items-start">
                         <span>Sinergi Satu Arah,</span>
                         <div class="typewriter-wrapper mt-1 md:mt-2">
@@ -262,7 +281,7 @@
                         </div>
                     </div>
 
-                    <!-- Filosofi Logo (Boks Putih Kontras Tinggi + Gradient Ketik) -->
+                    <!-- Filosofi Logo -->
                     <div class="bg-white/70 backdrop-blur-lg p-8 rounded-3xl border border-white/80 shadow-md">
                         <div class="text-center mb-8">
                             <div class="typewriter-wrapper justify-center">
@@ -297,12 +316,11 @@
                 </div>
             </section>
 
-            <!-- Cuplikan News di Home (Seamless Ticker Diperbaiki) -->
+            <!-- Cuplikan News di Home -->
             <section class="py-24 relative overflow-hidden bg-gradient-to-b from-white to-igPink/10">
                 <div class="container mx-auto px-6 relative z-10">
                     <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-8 border-b pb-4 border-igBlueLight/20 gap-4 text-center md:text-left">
                         <div>
-                            <!-- Animasi Ketik pada Portal Berita -->
                             <div class="typewriter-wrapper mb-2 pb-2">
                                 <h2 class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-igBlueDark via-igPink to-igYellow animate-gradient font-serif js-typewriter" data-text="News">&nbsp;</h2>
                                 <span class="custom-caret h-[35px] md:h-[45px]"></span>
@@ -315,7 +333,6 @@
                     </div>
                 </div>
 
-                <!-- Ticker Seamless 2-Track -->
                 <div class="ticker-wrap relative z-10">
                     <!-- Lajur 1 -->
                     <div class="ticker-track">
@@ -344,7 +361,7 @@
                             <p class="text-gray-600 text-sm line-clamp-2">Menjawab tantangan industri, PSDM gelar pelatihan desain UI/UX intensif...</p>
                         </div>
                     </div>
-                    <!-- Lajur 2 (Duplikat Persis untuk Loop Mulus) -->
+                    <!-- Lajur 2 (Duplikat) -->
                     <div class="ticker-track" aria-hidden="true">
                         <div class="news-card bg-white/95 rounded-3xl p-5 shadow-lg border border-gray-100 group cursor-pointer hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
                             <div class="w-full h-48 bg-gradient-to-br from-[#cbdfe8] to-[#a3c4f3] rounded-2xl mb-4"></div>
@@ -453,7 +470,7 @@
 
                 <h3 class="text-3xl font-bold text-igBlueDark mb-8 font-serif text-center">Departemen Fungsional</h3>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Template 1 -->
+                    <!-- Dept 1 -->
                     <div class="bg-white/60 backdrop-blur-md rounded-3xl p-6 border border-white/80 shadow-md">
                         <h4 class="text-2xl font-bold text-igBlueDark mb-4 font-serif">Hubungan Eksternal</h4>
                         <div class="w-full h-40 bg-white/50 border-2 border-dashed border-igPink/40 rounded-2xl flex items-center justify-center p-2 mb-4">
@@ -462,9 +479,13 @@
                         <div class="w-full h-40 bg-white/50 border-2 border-dashed border-igPink/40 rounded-2xl flex items-center justify-center p-2 mb-4">
                             <p class="font-mono text-[10px] text-igBlueDark font-bold">[FOTO 3]</p>
                         </div>
-                        <div class="text-sm text-gray-600 space-y-2"><p><strong>Visi Misi:</strong> [Menunggu]</p></div>
+                        <div class="text-sm text-gray-600 space-y-2">
+                            <p><strong>Ketua:</strong> [Menunggu Nama Ketua]</p>
+                            <p><strong>Visi Misi:</strong> [Menunggu data rilis]</p>
+                            <p><strong>Tupoksi:</strong> Bertanggung jawab dalam membangun dan menjalin kolaborasi strategis dengan publik, instansi luar, relasi media, serta menangani program sponsorship himpunan.</p>
+                        </div>
                     </div>
-                    <!-- Template 2 -->
+                    <!-- Dept 2 -->
                     <div class="bg-white/60 backdrop-blur-md rounded-3xl p-6 border border-white/80 shadow-md">
                         <h4 class="text-2xl font-bold text-igBlueDark mb-4 font-serif">Penelitian & Teknologi</h4>
                         <div class="w-full h-40 bg-white/50 border-2 border-dashed border-igBlueMedium/40 rounded-2xl flex items-center justify-center p-2 mb-4">
@@ -473,9 +494,13 @@
                         <div class="w-full h-40 bg-white/50 border-2 border-dashed border-igBlueMedium/40 rounded-2xl flex items-center justify-center p-2 mb-4">
                             <p class="font-mono text-[10px] text-igBlueDark font-bold">[FOTO 3]</p>
                         </div>
-                        <div class="text-sm text-gray-600 space-y-2"><p><strong>Visi Misi:</strong> [Menunggu]</p></div>
+                        <div class="text-sm text-gray-600 space-y-2">
+                            <p><strong>Ketua:</strong> [Menunggu Nama Ketua]</p>
+                            <p><strong>Visi Misi:</strong> [Menunggu data rilis]</p>
+                            <p><strong>Tupoksi:</strong> Mengakomodasi dan menaungi riset IT, web development, inovasi kecerdasan buatan (AI), serta menyelenggarakan pelatihan kompetensi dasar teknologi bagi mahasiswa.</p>
+                        </div>
                     </div>
-                    <!-- Template 3 -->
+                    <!-- Dept 3 -->
                     <div class="bg-white/60 backdrop-blur-md rounded-3xl p-6 border border-white/80 shadow-md">
                         <h4 class="text-2xl font-bold text-igBlueDark mb-4 font-serif">Kewirausahaan</h4>
                         <div class="w-full h-40 bg-white/50 border-2 border-dashed border-igYellow/60 rounded-2xl flex items-center justify-center p-2 mb-4">
@@ -484,7 +509,56 @@
                         <div class="w-full h-40 bg-white/50 border-2 border-dashed border-igYellow/60 rounded-2xl flex items-center justify-center p-2 mb-4">
                             <p class="font-mono text-[10px] text-igBlueDark font-bold">[FOTO 3]</p>
                         </div>
-                        <div class="text-sm text-gray-600 space-y-2"><p><strong>Visi Misi:</strong> [Menunggu]</p></div>
+                        <div class="text-sm text-gray-600 space-y-2">
+                            <p><strong>Ketua:</strong> [Menunggu Nama Ketua]</p>
+                            <p><strong>Visi Misi:</strong> [Menunggu data rilis]</p>
+                            <p><strong>Tupoksi:</strong> Mengelola manajemen operasional Marketplace HIMTI, penjualan merchandise resmi, serta merancang skema pendanaan kreatif untuk mendukung stabilitas finansial organisasi.</p>
+                        </div>
+                    </div>
+                    <!-- Dept 4 -->
+                    <div class="bg-white/60 backdrop-blur-md rounded-3xl p-6 border border-white/80 shadow-md">
+                        <h4 class="text-2xl font-bold text-igBlueDark mb-4 font-serif">PSDM</h4>
+                        <div class="w-full h-40 bg-white/50 border-2 border-dashed border-igPink/40 rounded-2xl flex items-center justify-center p-2 mb-4">
+                            <p class="font-mono text-[10px] text-igBlueDark font-bold">[FOTO 5]</p>
+                        </div>
+                        <div class="w-full h-40 bg-white/50 border-2 border-dashed border-igPink/40 rounded-2xl flex items-center justify-center p-2 mb-4">
+                            <p class="font-mono text-[10px] text-igBlueDark font-bold">[FOTO 3]</p>
+                        </div>
+                        <div class="text-sm text-gray-600 space-y-2">
+                            <p><strong>Ketua:</strong> [Menunggu Nama Ketua]</p>
+                            <p><strong>Visi Misi:</strong> [Menunggu data rilis]</p>
+                            <p><strong>Tupoksi:</strong> Merancang sistem kaderisasi, pengembangan soft-skill mahasiswa, evaluasi kinerja pengurus, serta manajemen keharmonisan internal seluruh anggota organisasi.</p>
+                        </div>
+                    </div>
+                    <!-- Dept 5 -->
+                    <div class="bg-white/60 backdrop-blur-md rounded-3xl p-6 border border-white/80 shadow-md">
+                        <h4 class="text-2xl font-bold text-igBlueDark mb-4 font-serif">Media & Informasi</h4>
+                        <div class="w-full h-40 bg-white/50 border-2 border-dashed border-igBlueMedium/40 rounded-2xl flex items-center justify-center p-2 mb-4">
+                            <p class="font-mono text-[10px] text-igBlueDark font-bold">[FOTO 5]</p>
+                        </div>
+                        <div class="w-full h-40 bg-white/50 border-2 border-dashed border-igBlueMedium/40 rounded-2xl flex items-center justify-center p-2 mb-4">
+                            <p class="font-mono text-[10px] text-igBlueDark font-bold">[FOTO 3]</p>
+                        </div>
+                        <div class="text-sm text-gray-600 space-y-2">
+                            <p><strong>Ketua:</strong> [Menunggu Nama Ketua]</p>
+                            <p><strong>Visi Misi:</strong> [Menunggu data rilis]</p>
+                            <p><strong>Tupoksi:</strong> Mengelola seluruh platform media sosial resmi, pembuatan desain grafis/visual, produksi konten interaktif, dan sentralisasi arus informasi himpunan.</p>
+                        </div>
+                    </div>
+                    <!-- Dept 6 -->
+                    <div class="bg-white/60 backdrop-blur-md rounded-3xl p-6 border border-white/80 shadow-md">
+                        <h4 class="text-2xl font-bold text-igBlueDark mb-4 font-serif">Pengabdian Masyarakat</h4>
+                        <div class="w-full h-40 bg-white/50 border-2 border-dashed border-igYellow/60 rounded-2xl flex items-center justify-center p-2 mb-4">
+                            <p class="font-mono text-[10px] text-igBlueDark font-bold">[FOTO 5]</p>
+                        </div>
+                        <div class="w-full h-40 bg-white/50 border-2 border-dashed border-igYellow/60 rounded-2xl flex items-center justify-center p-2 mb-4">
+                            <p class="font-mono text-[10px] text-igBlueDark font-bold">[FOTO 3]</p>
+                        </div>
+                        <div class="text-sm text-gray-600 space-y-2">
+                            <p><strong>Ketua:</strong> [Menunggu Nama Ketua]</p>
+                            <p><strong>Visi Misi:</strong> [Menunggu data rilis]</p>
+                            <p><strong>Tupoksi:</strong> Pelaksanaan dan pengawasan program-program sosial, penyaluran aksi peduli lingkungan, dan menerapkan solusi teknologi guna memberikan dampak langsung kepada masyarakat luas.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -503,14 +577,79 @@
                     </div>
                     <p class="text-gray-500 font-medium">Merchandise resmi HIMTI UNAIR.</p>
                 </div>
+                
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <!-- Produk 1 -->
                     <div class="bg-igWhiteGlow/80 backdrop-blur-sm rounded-3xl p-4 shadow-sm border border-white/80 flex flex-col justify-between">
                         <div>
                             <div class="aspect-square bg-white rounded-2xl mb-4 flex items-center justify-center text-4xl shadow-inner relative">👕<span class="absolute top-2 right-2 bg-red-400 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase">Hot</span></div>
                             <h3 class="font-bold text-igBlueDark font-serif line-clamp-1">PDH Aksentra 2026</h3>
                             <p class="text-xs text-gray-500 mb-2">Rp 150.000</p>
                         </div>
-                        <button onclick="addToCart('prod_1', 'PDH Aksentra 2026', 150000, '👕')" class="mt-3 w-full bg-igBlueDark text-white text-sm font-bold py-2 rounded-full hover:bg-igPink transition-colors">+ Keranjang</button>
+                        <button onclick="addToCart('prod_1', 'PDH Aksentra 2026', 150000, '👕')" class="mt-3 w-full text-white text-sm font-bold py-2.5 rounded-full btn-cart bg-gradient-to-r from-igBlueDark via-[#5a8bc2] to-igBlueDark shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-igPink">+ Keranjang</button>
+                    </div>
+                    <!-- Produk 2 -->
+                    <div class="bg-igWhiteGlow/80 backdrop-blur-sm rounded-3xl p-4 shadow-sm border border-white/80 flex flex-col justify-between">
+                        <div>
+                            <div class="aspect-square bg-white rounded-2xl mb-4 flex items-center justify-center text-4xl shadow-inner relative">🧥</div>
+                            <h3 class="font-bold text-igBlueDark font-serif line-clamp-1">Jaket Eksklusif</h3>
+                            <p class="text-xs text-gray-500 mb-2">Rp 220.000</p>
+                        </div>
+                        <button onclick="addToCart('prod_2', 'Jaket Eksklusif', 220000, '🧥')" class="mt-3 w-full text-white text-sm font-bold py-2.5 rounded-full btn-cart bg-gradient-to-r from-igBlueDark via-[#5a8bc2] to-igBlueDark shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-igPink">+ Keranjang</button>
+                    </div>
+                    <!-- Produk 3 -->
+                    <div class="bg-igWhiteGlow/80 backdrop-blur-sm rounded-3xl p-4 shadow-sm border border-white/80 flex flex-col justify-between">
+                        <div>
+                            <div class="aspect-square bg-white rounded-2xl mb-4 flex items-center justify-center text-4xl shadow-inner relative">🧵</div>
+                            <h3 class="font-bold text-igBlueDark font-serif line-clamp-1">Lanyard Kabinet</h3>
+                            <p class="text-xs text-gray-500 mb-2">Rp 35.000</p>
+                        </div>
+                        <button onclick="addToCart('prod_3', 'Lanyard Kabinet', 35000, '🧵')" class="mt-3 w-full text-white text-sm font-bold py-2.5 rounded-full btn-cart bg-gradient-to-r from-igBlueDark via-[#5a8bc2] to-igBlueDark shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-igPink">+ Keranjang</button>
+                    </div>
+                    <!-- Produk 4 -->
+                    <div class="bg-igWhiteGlow/80 backdrop-blur-sm rounded-3xl p-4 shadow-sm border border-white/80 flex flex-col justify-between">
+                        <div>
+                            <div class="aspect-square bg-white rounded-2xl mb-4 flex items-center justify-center text-4xl shadow-inner relative">📓</div>
+                            <h3 class="font-bold text-igBlueDark font-serif line-clamp-1">Notebook Aksentra</h3>
+                            <p class="text-xs text-gray-500 mb-2">Rp 45.000</p>
+                        </div>
+                        <button onclick="addToCart('prod_4', 'Notebook Aksentra', 45000, '📓')" class="mt-3 w-full text-white text-sm font-bold py-2.5 rounded-full btn-cart bg-gradient-to-r from-igBlueDark via-[#5a8bc2] to-igBlueDark shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-igPink">+ Keranjang</button>
+                    </div>
+                    <!-- Produk 5 -->
+                    <div class="bg-igWhiteGlow/80 backdrop-blur-sm rounded-3xl p-4 shadow-sm border border-white/80 flex flex-col justify-between">
+                        <div>
+                            <div class="aspect-square bg-white rounded-2xl mb-4 flex items-center justify-center text-4xl shadow-inner relative">☕</div>
+                            <h3 class="font-bold text-igBlueDark font-serif line-clamp-1">Mug Keramik HIMTI</h3>
+                            <p class="text-xs text-gray-500 mb-2">Rp 30.000</p>
+                        </div>
+                        <button onclick="addToCart('prod_5', 'Mug Keramik HIMTI', 30000, '☕')" class="mt-3 w-full text-white text-sm font-bold py-2.5 rounded-full btn-cart bg-gradient-to-r from-igBlueDark via-[#5a8bc2] to-igBlueDark shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-igPink">+ Keranjang</button>
+                    </div>
+                    <!-- Produk 6 -->
+                    <div class="bg-igWhiteGlow/80 backdrop-blur-sm rounded-3xl p-4 shadow-sm border border-white/80 flex flex-col justify-between">
+                        <div>
+                            <div class="aspect-square bg-white rounded-2xl mb-4 flex items-center justify-center text-4xl shadow-inner relative">🎒</div>
+                            <h3 class="font-bold text-igBlueDark font-serif line-clamp-1">Tote Bag Kanvas</h3>
+                            <p class="text-xs text-gray-500 mb-2">Rp 55.000</p>
+                        </div>
+                        <button onclick="addToCart('prod_6', 'Tote Bag Kanvas', 55000, '🎒')" class="mt-3 w-full text-white text-sm font-bold py-2.5 rounded-full btn-cart bg-gradient-to-r from-igBlueDark via-[#5a8bc2] to-igBlueDark shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-igPink">+ Keranjang</button>
+                    </div>
+                    <!-- Produk 7 -->
+                    <div class="bg-igWhiteGlow/80 backdrop-blur-sm rounded-3xl p-4 shadow-sm border border-white/80 flex flex-col justify-between">
+                        <div>
+                            <div class="aspect-square bg-white rounded-2xl mb-4 flex items-center justify-center text-4xl shadow-inner relative">🧢</div>
+                            <h3 class="font-bold text-igBlueDark font-serif line-clamp-1">Topi Baseball Polo</h3>
+                            <p class="text-xs text-gray-500 mb-2">Rp 40.000</p>
+                        </div>
+                        <button onclick="addToCart('prod_7', 'Topi Baseball Polo', 40000, '🧢')" class="mt-3 w-full text-white text-sm font-bold py-2.5 rounded-full btn-cart bg-gradient-to-r from-igBlueDark via-[#5a8bc2] to-igBlueDark shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-igPink">+ Keranjang</button>
+                    </div>
+                    <!-- Produk 8 -->
+                    <div class="bg-igWhiteGlow/80 backdrop-blur-sm rounded-3xl p-4 shadow-sm border border-white/80 flex flex-col justify-between">
+                        <div>
+                            <div class="aspect-square bg-white rounded-2xl mb-4 flex items-center justify-center text-4xl shadow-inner relative">🖊️</div>
+                            <h3 class="font-bold text-igBlueDark font-serif line-clamp-1">Pena Premium Custom</h3>
+                            <p class="text-xs text-gray-500 mb-2">Rp 25.000</p>
+                        </div>
+                        <button onclick="addToCart('prod_8', 'Pena Premium Custom', 25000, '🖊️')" class="mt-3 w-full text-white text-sm font-bold py-2.5 rounded-full btn-cart bg-gradient-to-r from-igBlueDark via-[#5a8bc2] to-igBlueDark shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-igPink">+ Keranjang</button>
                     </div>
                 </div>
             </div>
@@ -647,13 +786,38 @@
         }
 
         let cartCount = 0;
+        
         function addToCart(id, name, price, icon) {
             cartCount++;
+            
+            // Perbarui Angka Badge
             document.getElementById('cartBadge').innerText = cartCount;
             document.getElementById('cartBadgeMobile').innerText = cartCount;
             document.getElementById('cartBadge').classList.remove('scale-0');
             document.getElementById('cartBadgeMobile').classList.remove('scale-0');
-            alert(name + " berhasil ditambahkan ke keranjang!");
+            
+            // Panggil Notifikasi Toast Modern
+            showToast(name);
+        }
+
+        function showToast(productName) {
+            const toast = document.getElementById('toastNotification');
+            const toastMsg = document.getElementById('toastMessage');
+            
+            toastMsg.innerText = productName + " masuk ke keranjang.";
+            
+            // Animasi Masuk
+            toast.classList.remove('opacity-0', '-translate-y-10', 'pointer-events-none');
+            toast.classList.add('opacity-100', 'translate-y-0');
+            
+            // Reset timer jika diklik berkali-kali dengan cepat
+            if(window.toastTimer) clearTimeout(window.toastTimer);
+            
+            // Animasi Keluar setelah 3 Detik
+            window.toastTimer = setTimeout(() => { 
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', '-translate-y-10', 'pointer-events-none'); 
+            }, 3000);
         }
 
         function showModal(id) {
@@ -665,6 +829,7 @@
                 el.querySelector('div').classList.add('scale-100');
             }, 10);
         }
+        
         function closeModal(id) {
             const el = document.getElementById(id);
             el.classList.add('opacity-0');
@@ -688,7 +853,6 @@
                     if (el.closest('.page-section').classList.contains('hidden')) return;
 
                     let displayStr = textToType.substring(0, i);
-                    // Trik agar container tidak kempes saat string kosong (menggunakan spasi kosong non-breaking)
                     if (displayStr === '') displayStr = '\u00A0';
 
                     if (!isDeleting && i <= textToType.length) {
